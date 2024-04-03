@@ -343,7 +343,7 @@ message BatchGetSitesResponse {
 message GetShipmentRequest {
   // The resource name of the shipment to retrieve.
   // Format: shippers/{shipper}/shipments/{shipment}
-  string name = 1 [
+  optional string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference).type = "freight-example.einride.tech/Shipment"
   ];

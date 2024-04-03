@@ -6,6 +6,7 @@ import (
 	examplefreightv1 "go.einride.tech/aip/proto/gen/einride/example/freight/v1"
 	"google.golang.org/genproto/googleapis/api/annotations"
 	"google.golang.org/genproto/googleapis/example/library/v1"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/fieldmaskpb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"gotest.tools/v3/assert"
@@ -40,7 +41,8 @@ func TestCopyFields(t *testing.T) {
 
 func TestValidateRequiredFields(t *testing.T) {
 	t.Parallel()
-	assert.NilError(t, ValidateRequiredFields(&examplefreightv1.GetShipmentRequest{Name: "testbook"}))
+	assert.NilError(t, ValidateRequiredFields(&examplefreightv1.GetShipmentRequest{Name: proto.String("testbook")}))
+	assert.Error(t, ValidateRequiredFields(&examplefreightv1.GetShipmentRequest{Name: proto.String("")}), "missing required field: name")
 	assert.Error(t, ValidateRequiredFields(&examplefreightv1.GetShipmentRequest{}), "missing required field: name")
 }
 
